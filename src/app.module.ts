@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -11,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: ['./src/**/*.entity.ts', '.dist/**/*.entity.js'],
+    entities: [join(__dirname, '**', '*.entity.{ts,js}')],
     synchronize: true,
     logging: true,
   })],
